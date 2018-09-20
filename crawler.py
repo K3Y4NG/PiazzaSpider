@@ -30,7 +30,7 @@ for i in range(6,9): #choose the post number you want
     else:
         for name in names:
             print("Author: " + name.text)
-    print("Text:" + text.text)
+    print("Text: " + text.text)
 
     selected_answers = browser.find_elements_by_id("s_answer")
     for selected_answer in selected_answers:
