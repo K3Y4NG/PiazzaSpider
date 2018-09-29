@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 
 
 with open ('data.json') as f:
@@ -58,10 +59,19 @@ for i in range(len(data)):
             info["text"] = reply["text"]
             append_result(author)
 
+
+def compare(item):
+    date_str = item["time"][4:24]
+    date_obj = datetime.strptime(date_str, '%b %d %Y %H:%M:%S')
+    return date_obj
+
 count = 0
 for res in result:
     count += len(result[res])
-    print(res + ": " + str(len(result[res])))
+    result[res].sort(key=compare)
+    print("\n" + res + ": " + str(len(result[res])), end="")
+    for i in range(len(result[res])):
+        print(", " + result[res][i]["time"][4:24], end="")
 print("\nTotal item number:" +str(count))
 
 with open("data_student.json", 'w') as outfile:
